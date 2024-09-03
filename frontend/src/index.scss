@@ -1,0 +1,58 @@
+:root {
+  --black: #212121;
+  --white: #ffffff;
+  --scrollColorBlack: rgba(0, 0, 0, 0.7);
+  --scrollColorWhite: rgba(255, 255, 255, 0.3);
+  --mint: #94d6c5;
+  --darkmint: #3a987f;
+  --pink: #d694c6;
+  --darkpink: #c15da9;
+  --yellow: #ffd700;
+  --darkyellow: #645047;
+  --orange: #ff8c00;
+  --darkorange: #e65100;
+  --indigo: #01579b;
+  --darkred: #c62828;
+  --scrollColor: var(--scrollColorBlack);
+  --semipink: #f5f6fa;
+  --background: var(--white);
+  --foreground: var(--black);
+  --highlight: var(--pink);
+  --transition: 0s ease;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "GmarketSansMedium";
+  transition: background-color 1s;
+}
+
+@font-face {
+  font-family: "GmarketSansMedium";
+  src: url("./fonts/GmarketSansMedium.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+*::-webkit-scrollbar,
+*::-webkit-scrollbar-thumb {
+  width: 8px !important;
+  height: 8px;
+  border-radius: 1px !important;
+  margin: 0 !important;
+}
+body::-webkit-scrollbar-thumb {
+  color: var(--scrollColor) !important;
+}
+*::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 0 10px !important;
+}
+*::-webkit-scrollbar-corner {
+  background-color: transparent !important;
+  color: transparent !important;
+}

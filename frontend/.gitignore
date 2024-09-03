@@ -1,0 +1,7 @@
+.vscode
+dist
+node_modules
+build/
+!.gitkeep
+package-lock.json
+__pycache__/
