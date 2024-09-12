@@ -68,9 +68,9 @@ class BertEvalDataset(data_utils.Dataset):
             tokens.append(s)
 
         tokens = tokens[-self.max_len:]
-        mask_len = self.max_len - len(tokens)
+        mask_len = self.max_len - len(tokens) - 1
 
-        tokens = [0] * mask_len + tokens
+        tokens = [0] * mask_len + tokens + [0]
 
         return [torch.LongTensor(tokens)]
 
