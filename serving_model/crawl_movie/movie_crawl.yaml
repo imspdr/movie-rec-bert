@@ -1,0 +1,16 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  name: movie-rec-bert-crawl
+spec:
+  predictor:
+    containers:
+      - name: kserve-container
+        image: konglsh96/movie-rec-bert:crawl
+        resources:
+          limits:
+            cpu: 1
+            memory: 500Mi
+          requests:
+            cpu: 1
+            memory: 500Mi
