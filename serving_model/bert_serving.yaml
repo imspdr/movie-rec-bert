@@ -1,12 +1,12 @@
 apiVersion: serving.kserve.io/v1beta1
 kind: InferenceService
 metadata:
-  name: bert-movie-lens
+  name: movie-rec-bert-serving
 spec:
   predictor:
     containers:
-      - name: bert-movie
-        image: konglsh96/bert-movie-serving:latest
+      - name: kserve-container
+        image: konglsh96/movie-rec-bert:serving
         resources:
           limits:
             cpu: 1
