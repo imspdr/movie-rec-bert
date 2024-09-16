@@ -7,7 +7,16 @@ from bert4rec.dataset import BertEvalDataset
 model = torch.load("bert4rec_model")
 model.eval()
 
-dataset = BertEvalDataset([[5,6,7]])
+with open("item2index.json", "r") as file:
+    item2index = json.load(file)
+print(list(item2index.keys())[:10])
+given_data = [1,2,3,4]
+index_data = []
+for item in given_data:
+    if str(item) in list(item2index.keys()):
+        index_data.append(item2index[str(item)])
+print(index_data)
+dataset = BertEvalDataset([index_data])
 dataloader = data_utils.DataLoader(dataset, batch_size=128,
                                    shuffle=True, pin_memory=True)
 

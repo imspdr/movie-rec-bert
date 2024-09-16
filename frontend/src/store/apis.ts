@@ -43,10 +43,6 @@ export const recAPI = {
         movieApiURL,
         {
           instances: [movieId],
-          params: {
-            do_predict: 1,
-            periods: 100,
-          },
         },
         {
           headers: {

@@ -48,8 +48,6 @@ class MovieBert(kserve.Model):
     def load(self) -> bool:
         logging.info("load : use bert model")
         self.model = torch.load("bert4rec_model")
-        self.model.eval()
-
         with open("index2item.json", "r") as file:
             self.index2item = json.load(file)
         with open("item2index.json", "r") as file:
@@ -68,26 +66,28 @@ class MovieBert(kserve.Model):
 
         params = try_or_default(payload, "params", {})
         topk = try_or_default(params, "topk", 10)
-
-
+        print(given_data)
+        print(topk)
         try:
             index_data = []
             for item in list(given_data):
-                if item in self.item2index.keys():
-                    index_data.append(self.item2index[item])
-
-            dataset = BertEvalDataset([list(index_data)])
+                if str(item) in self.item2index.keys():
+                    index_data.append(self.item2index[str(item)])
+            print(index_data)
+            dataset = BertEvalDataset([index_data])
             dataloader = data_utils.DataLoader(dataset, batch_size=128,
                                                shuffle=True, pin_memory=True)
 
+            self.model.eval()
             for batch in dataloader:
                 batch = [x.to("cpu") for x in batch]
+                print(batch)
                 result = self.model(batch[0])
                 result = result[:, -1, :]
                 scores = pd.DataFrame(result.cpu().detach().numpy().reshape(-1))
                 scores = scores.sort_values(by=0, ascending=False, ignore_index=False)
                 top_k_items = scores[:topk].index.to_list()
-
+            print(top_k_items)
             predictions = []
             for item in top_k_items:
                 predictions.append(self.index2item[str(item)])
