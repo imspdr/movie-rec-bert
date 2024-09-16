@@ -10,6 +10,7 @@ with open("../bert/item2index.json", "r") as file:
 
 movie_id2tmdb_id = {}
 movie_pool = []
+
 for item_id in item_map.keys():
     find = movie_mapper[movie_mapper["movieId"] == int(item_id)].index
     value = str(int(movie_mapper["tmdbId"].loc[find]))
@@ -25,10 +26,11 @@ for item_id in item_map.keys():
             info = soup.find(class_="title ott_false").find_all("a")
         except AttributeError:
             continue
+    release = str(soup.find(class_="release").text).strip()
     title = str(info[0].text)
     movie_pool.append({
         "id": int(item_id),
-        "title": title
+        "title": title+"("+release.split("/")[0]+")"
     })
 
 with open("movie_id2tmdb_id.json", "w") as file:

@@ -15,8 +15,8 @@
   --darkred: #c62828;
   --scrollColor: var(--scrollColorBlack);
   --semipink: #f5f6fa;
-  --background: var(--white);
-  --foreground: var(--black);
+  --background: var(--black);
+  --foreground: var(--white);
   --highlight: var(--pink);
   --transition: 0s ease;
 }
@@ -29,7 +29,6 @@ html {
   background: var(--background);
   color: var(--foreground);
   font-family: "GmarketSansMedium";
-  transition: background-color 1s;
 }
 
 @font-face {

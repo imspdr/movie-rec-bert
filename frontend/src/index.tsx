@@ -1,15 +1,24 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { RootStoreProvider } from "./store/RootStoreProvider";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import App from "./App";
 import "./index.scss";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "GmarketSansMedium",
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 
 root.render(
   <BrowserRouter>
     <RootStoreProvider>
-      <App />
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
     </RootStoreProvider>
   </BrowserRouter>
 );

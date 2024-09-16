@@ -1,0 +1,16 @@
+namespace: movie-rec-bert
+frontend:
+  image: konglsh96/movie_rec_bert:front
+  resources:
+    limits:
+      cpu: 100m
+      memory: 100Mi
+    requests:
+      cpu: 100m
+      memory: 100Mi
+  service:
+    ip: 192.168.49.2
+    port: 31235
+istio:
+  ip: 192.168.49.2
+  port: 31397

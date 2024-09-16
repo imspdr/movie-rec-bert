@@ -49,20 +49,36 @@ class MovieCrawl(kserve.Model):
             try:
                 info = soup.find(class_="title ott_true").find_all("a")
             except AttributeError:
-                info = soup.find(class_="title ott_false").find_all("a")
-            title = str(info[0].text)
-            tags = list(map(lambda a: str(a.text), info[1:]))
-            release = str(soup.find(class_="release").text).strip()
-            description = str(soup.find(class_="overview").text).strip()
+                try:
+                    info = soup.find(class_="title ott_false").find_all("a")
+                except AttributeError:
+                    info = False
 
-            predictions = [{
-                "title": title,
-                "tags": tags,
-                "release": release,
-                "description": description,
-                "img": img
-            }]
+            if info:
+                title = str(info[0].text)
+                tags = list(map(lambda a: str(a.text), info[1:]))
+                release = str(soup.find(class_="release").text).strip()
+                description = str(soup.find(class_="overview").text).strip()
 
+                predictions = [{
+                    "id": target,
+                    "title": title,
+                    "tags": tags,
+                    "release": release,
+                    "description": description,
+                    "img": img,
+                    "tmdb": tmdb_id
+                }]
+            else:
+                predictions = [{
+                    "id": target,
+                    "title": "not found",
+                    "tags": [],
+                    "release": "-",
+                    "description": "",
+                    "img": "",
+                    "tmdb": tmdb_id
+                }]
             result = {
                 "predictions": predictions,
             }
