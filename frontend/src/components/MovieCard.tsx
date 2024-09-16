@@ -71,6 +71,7 @@ export default function MovieCard(props: { movie: MovieData; width: number; heig
         flex-direction: row;
         border-radius: 10px;
         transition: 0.8s ease;
+        height: ${props.height}px;
       `}
       onMouseLeave={() => setHover(false)}
       onMouseEnter={() => setHover(true)}

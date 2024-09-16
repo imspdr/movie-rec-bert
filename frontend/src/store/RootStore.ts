@@ -73,18 +73,12 @@ export class RootStore {
 
   buildList = async () => {
     this.myMovieListBuilt = {
-      ...this.myMovieListBuilt,
+      list: [],
       status: "loading",
     };
     for (let i = 0; i < this.myMovieList.length; i++) {
       let movie = this.myMovieList[i];
       if (movie) {
-        if (
-          this.myMovieListBuilt.list.find((listMovie) => String(listMovie.id) === String(movie!.id))
-        ) {
-          continue;
-        }
-
         const cacheMovie = this.movieCache.find(
           (cacheMovie) => String(cacheMovie.id) === String(movie!.id)
         );
