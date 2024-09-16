@@ -9,7 +9,7 @@ const movieApiURL = "/api/v1/models/movie-rec-bert-crawl:predict";
 const movieApiHost = "movie-rec-bert-crawl.movie-rec-bert.example.com";
 
 export const recAPI = {
-  getrecommendationData: async (movieIds: number[], topk: number) => {
+  getRecommendationData: async (movieIds: number[], topk: number) => {
     const ret = await axios
       .post(
         recommendURL,

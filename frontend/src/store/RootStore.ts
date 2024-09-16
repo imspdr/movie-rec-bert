@@ -12,11 +12,16 @@ export class RootStore {
 
   constructor() {
     this._moviePool = moviePool;
-    this._movieCache = [];
-    this._myMovieList = [];
+    const localCache = localStorage.getItem("movie-rec-bert-cache");
+    const localList = localStorage.getItem("my-movie-list");
+    const localListBuilt = localStorage.getItem("my-movie-list-built");
+    this._movieCache = localCache ? JSON.parse(localCache) : [];
+
+    this._myMovieList = localList ? JSON.parse(localList) : [];
+
     this._myMovieListBuilt = {
       status: "ready",
-      list: [],
+      list: localListBuilt ? JSON.parse(localListBuilt) : [],
     };
     this._resultMovieList = {
       status: "ready",
@@ -59,19 +64,30 @@ export class RootStore {
     if (this.myMovieList.find((myMovie) => myMovie.id === movie.id)) {
       return;
     }
-    this.myMovieList = [...this.myMovieList.slice(0, 99), movie];
+    this.myMovieList = [movie, ...this.myMovieList.slice(0, 99)];
   };
+
+  addCache = (movie: MovieData[]) => {
+    this.movieCache = [...movie, ...this.movieCache.slice(0, 99)];
+  };
+
   buildList = async () => {
     this.myMovieListBuilt = {
-      list: [],
+      ...this.myMovieListBuilt,
       status: "loading",
     };
     for (let i = 0; i < this.myMovieList.length; i++) {
       let movie = this.myMovieList[i];
       if (movie) {
-        if (this.myMovieListBuilt.list.find((listMovie) => listMovie.id === movie!.id)) continue;
+        if (
+          this.myMovieListBuilt.list.find((listMovie) => String(listMovie.id) === String(movie!.id))
+        ) {
+          continue;
+        }
 
-        const cacheMovie = this.movieCache.find((cacheMovie) => cacheMovie.id === movie!.id);
+        const cacheMovie = this.movieCache.find(
+          (cacheMovie) => String(cacheMovie.id) === String(movie!.id)
+        );
         if (cacheMovie) {
           this.myMovieListBuilt = {
             ...this.myMovieListBuilt,
@@ -83,6 +99,7 @@ export class RootStore {
             ...this.myMovieListBuilt,
             list: [...this.myMovieListBuilt.list, ...movieData],
           };
+          this.addCache(movieData);
         }
       }
     }
@@ -91,6 +108,9 @@ export class RootStore {
       ...this.myMovieListBuilt,
       status: "ready",
     };
+    localStorage.setItem("my-movie-list", JSON.stringify(this.myMovieList));
+    localStorage.setItem("my-movie-list-built", JSON.stringify(this.myMovieListBuilt.list));
+    localStorage.setItem("movie-rec-bert-cache", JSON.stringify(this.movieCache));
   };
   buildResult = async () => {
     this.resultMovieList = {
@@ -98,7 +118,7 @@ export class RootStore {
       status: "loading",
     };
 
-    const res = await recAPI.getrecommendationData(
+    const res = await recAPI.getRecommendationData(
       this.myMovieList.map((movie) => movie.id),
       10
     );
@@ -106,7 +126,9 @@ export class RootStore {
     for (let i = 0; i < res.length; i++) {
       let movie = res[i];
       if (movie) {
-        const cacheMovie = this.movieCache.find((cacheMovie) => cacheMovie.id === movie);
+        const cacheMovie = this.movieCache.find(
+          (cacheMovie) => String(cacheMovie.id) === String(movie)
+        );
         if (cacheMovie) {
           this.resultMovieList = {
             ...this.resultMovieList,
@@ -118,6 +140,8 @@ export class RootStore {
             ...this.resultMovieList,
             list: [...this.resultMovieList.list, ...movieData],
           };
+
+          this.addCache(movieData);
         }
       }
     }
@@ -125,5 +149,6 @@ export class RootStore {
       ...this.resultMovieList,
       status: "ready",
     };
+    localStorage.setItem("movie-rec-bert-cache", JSON.stringify(this.movieCache));
   };
 }
