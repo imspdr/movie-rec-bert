@@ -88,6 +88,7 @@ function SelectMovieDialog(props: { open: boolean; setOpen: (v: boolean) => void
             />
             <span>재밌게 본 영화를 검색한 뒤 선택하여</span>
             <span>내 영화 목록에 추가하세요!</span>
+            <span>최대 19개</span>
           </div>
           <div
             css={css`

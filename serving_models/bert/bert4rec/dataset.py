@@ -3,7 +3,7 @@ import torch
 import torch.utils.data as data_utils
 
 class BertTrainDataset(data_utils.Dataset):
-    def __init__(self, u2seq, n_items, max_len=100, mask_prob=0.15):
+    def __init__(self, u2seq, n_items, max_len=20, mask_prob=0.15):
         self.u2seq = u2seq
         self.users = sorted(self.u2seq.keys())
         self.max_len = max_len
@@ -54,7 +54,7 @@ class BertTrainDataset(data_utils.Dataset):
 class BertEvalDataset(data_utils.Dataset):
     def __init__(self, seq):
         self.input_seq = seq
-        self.max_len = 100
+        self.max_len = 20
 
     def __len__(self):
         return len(self.input_seq)

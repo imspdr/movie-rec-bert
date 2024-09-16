@@ -7,7 +7,7 @@ from bert4rec.dataset import BertEvalDataset
 model = torch.load("bert4rec_model")
 model.eval()
 
-dataset = BertEvalDataset([[1,2,3]])
+dataset = BertEvalDataset([[5,6,7]])
 dataloader = data_utils.DataLoader(dataset, batch_size=128,
                                    shuffle=True, pin_memory=True)
 

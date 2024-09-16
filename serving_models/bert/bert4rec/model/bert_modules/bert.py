@@ -7,7 +7,7 @@ class BERT(nn.Module):
         super().__init__()
 
         # self.init_weights()
-        max_len = 100
+        max_len = 20
         n_layers = 2
         heads = 4
         vocab_size = num_items + 2

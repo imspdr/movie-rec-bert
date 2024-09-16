@@ -64,7 +64,7 @@ export class RootStore {
     if (this.myMovieList.find((myMovie) => myMovie.id === movie.id)) {
       return;
     }
-    this.myMovieList = [movie, ...this.myMovieList.slice(0, 99)];
+    this.myMovieList = [movie, ...this.myMovieList.slice(0, 18)];
   };
 
   addCache = (movie: MovieData[]) => {

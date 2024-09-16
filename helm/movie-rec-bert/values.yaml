@@ -1,6 +1,6 @@
 namespace: movie-rec-bert
 frontend:
-  image: konglsh96/movie_rec_bert:front
+  image: konglsh96/movie-rec-bert:front
   resources:
     limits:
       cpu: 100m
