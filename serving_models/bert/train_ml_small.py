@@ -9,11 +9,12 @@ import json
 file_path = "ratings.csv"
 item_column = "movieId"
 user_column = "userId"
+MAX_LEN = 70
+min_rating = 4
 
 df = pd.read_csv(file_path)
 
 # 레이팅 낮은 거 안씀
-min_rating = 2
 df = df[df['rating'] >= min_rating]
 
 # 조회 낮은 영화 삭제
@@ -47,13 +48,13 @@ for i, user in enumerate(user_group):
     user2items = user[1].sort_values(by="timestamp")[item_column]
     user2seq_data[user[0]] = list(map(lambda d: item_map[d], list(user2items)))
 
-dataset = BertTrainDataset(user2seq_data, num_items)
+dataset = BertTrainDataset(user2seq_data, num_items, max_len=MAX_LEN)
 dataloader = data_utils.DataLoader(dataset, batch_size=128,
                                    shuffle=True, pin_memory=True)
 
 # 모델 학습
-model = BERTModel(num_items)
+model = BERTModel(num_items, max_len=MAX_LEN)
 
 trainer = Trainer(model, dataloader)
-trainer.train(200)
+trainer.train(100)
 

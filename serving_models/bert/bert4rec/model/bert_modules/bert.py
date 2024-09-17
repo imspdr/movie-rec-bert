@@ -3,11 +3,11 @@ from ..bert_modules.embedding import BERTEmbedding
 from ..bert_modules.transformer import TransformerBlock
 
 class BERT(nn.Module):
-    def __init__(self, num_items):
+    def __init__(self, num_items, max_len):
         super().__init__()
 
         # self.init_weights()
-        max_len = 100
+        max_len = max_len
         n_layers = 2
         heads = 4
         vocab_size = num_items + 2

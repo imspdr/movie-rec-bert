@@ -52,9 +52,9 @@ class BertTrainDataset(data_utils.Dataset):
         return torch.LongTensor(tokens), torch.LongTensor(labels)
 
 class BertEvalDataset(data_utils.Dataset):
-    def __init__(self, seq):
+    def __init__(self, seq, max_len=100):
         self.input_seq = seq
-        self.max_len = 100
+        self.max_len = max_len
 
     def __len__(self):
         return len(self.input_seq)
