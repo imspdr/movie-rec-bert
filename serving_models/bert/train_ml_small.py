@@ -26,6 +26,7 @@ user_sizes = df.groupby(user_column).size()
 good_users = user_sizes.index[user_sizes >= 2]
 df = df[df[user_column].isin(good_users)]
 
+print(user_sizes.mean())
 num_users = df[user_column].nunique()
 
 # item index 압축하고 mapper 기억
