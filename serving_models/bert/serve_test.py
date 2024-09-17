@@ -16,7 +16,7 @@ for item in given_data:
     if str(item) in list(item2index.keys()):
         index_data.append(item2index[str(item)])
 print(index_data)
-dataset = BertEvalDataset([index_data])
+dataset = BertEvalDataset([index_data], max_len=70)
 dataloader = data_utils.DataLoader(dataset, batch_size=128,
                                    shuffle=True, pin_memory=True)
 
