@@ -1,4 +1,4 @@
-# simplePredict
+# movieRecBert
 
 ## Structure
 
