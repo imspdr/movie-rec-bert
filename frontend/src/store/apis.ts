@@ -2,11 +2,13 @@ import axios from "axios";
 import crawlSample from "./crawlSample.json";
 import { MovieData } from "./type";
 
+const namespace = "TOENVNAMESPACE"
+
 const recommendURL = "/api/v1/models/movie-rec-bert-serving:predict";
-const recommendHost = "movie-rec-bert-serving.movie-rec-bert.example.com";
+const recommendHost = `movie-rec-bert-serving.${namespace}.example.com`;
 
 const movieApiURL = "/api/v1/models/movie-rec-bert-crawl:predict";
-const movieApiHost = "movie-rec-bert-crawl.movie-rec-bert.example.com";
+const movieApiHost = `movie-rec-bert-crawl.${namespace}.example.com`;
 
 export const recAPI = {
   getRecommendationData: async (movieIds: number[], topk: number) => {

@@ -27,6 +27,8 @@ spec:
               cpu: {{ .Values.frontend.resources.requests.cpu }}
               memory: {{ .Values.frontend.resources.requests.memory }}
           env:
+            - name: NAMESPACE
+              value: "{{ .Values.namespace }}"
             - name: ISTIO_IP
               value: "{{ .Values.istio.ip }}"
             - name: ISTIO_PORT
