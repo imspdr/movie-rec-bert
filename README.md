@@ -51,7 +51,7 @@ BERT4Rec은 양방향 sequence 추론 모델인 BERT를 아이템 추천에 이�
 이중 rating 데이터를 이용해 사용자가 4점 이상 점수를 준 interaction 정보만을 이용해 학습을 진행했으며, 최소 3명의 사용자에게는 평가받은 영화만을 이용했다.
 이 때 사용자별 평가한 영화의 평균 길이가 70을 조금 넘어서 BERT의 input sequece max length를 70으로 설정하여 학습시켰다.
 
-모델을 구성하는 코드는 (https://github.com/zanussbaum/BERT4Rec-VAE-Pytorch)를 이용했으며, 전처리 작업과 데이터를 다루는 부분을 간단하게 구현하여 사용했다.
+모델을 구성하는 코드는 (https://github.com/zanussbaum/BERT4Rec-VAE-Pytorch) 를 이용했으며, 전처리 작업과 데이터를 다루는 부분을 간단하게 구현하여 사용했다.
 학습과 관련된 코드는 /serving_models/bert/train_ml_small.py 에서 확인할 수 있다.
 
 
