@@ -1,4 +1,4 @@
-# movieRecBert
+# movie-rec-bert
 
 ## Structure
 
