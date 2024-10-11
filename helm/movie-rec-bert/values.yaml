@@ -11,6 +11,22 @@ frontend:
   service:
     ip: 192.168.49.2
     port: 31235
+bertserving:
+  resources:
+    limits:
+      cpu: 200m
+      memory: 500Mi
+    requests:
+      cpu: 200m
+      memory: 500Mi
+moviecrawl:
+  resources:
+    limits:
+      cpu: 200m
+      memory: 200Mi
+    requests:
+      cpu: 200m
+      memory: 200Mi
 istio:
   ip: 192.168.49.2
   port: 31397

@@ -10,8 +10,8 @@ spec:
         image: konglsh96/movie-rec-bert:serving
         resources:
           limits:
-            cpu: 1
-            memory: 500Mi
+            cpu: {{ .Values.bertserving.resources.limits.cpu }}
+            memory: {{ .Values.bertserving.resources.limits.memory }}
           requests:
-            cpu: 1
-            memory: 500Mi
+            cpu: {{ .Values.bertserving.resources.requests.cpu }}
+            memory: {{ .Values.bertserving.resources.requests.memory }}

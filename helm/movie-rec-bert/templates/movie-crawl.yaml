@@ -10,8 +10,8 @@ spec:
         image: konglsh96/movie-rec-bert:crawl
         resources:
           limits:
-            cpu: 1
-            memory: 500Mi
+            cpu: {{ .Values.moviecrawl.resources.limits.cpu }}
+            memory: {{ .Values.moviecrawl.resources.limits.memory }}
           requests:
-            cpu: 1
-            memory: 500Mi
+            cpu: {{ .Values.moviecrawl.resources.requests.cpu }}
+            memory: {{ .Values.moviecrawl.resources.requests.memory }}
