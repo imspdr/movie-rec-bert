@@ -6,7 +6,9 @@
 
 ## Description
 
-Kserve의 predictor를 이용한 serverless program. 
+아이템 사용 순서를 기반으로 학습하여 sequential recommendation을 하는 BERT4Rec모델을 MovieLens data를 이용해 학습시켜 만든 영화 추천 시스템.
+
+Kserve의 predictor를 이용한 serverless program이다.
 
 Nginx 및 React로 구성된 프론트엔드와 2개의 Kserve inference service crd로 구성된다.
 
